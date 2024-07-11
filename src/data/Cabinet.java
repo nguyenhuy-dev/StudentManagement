@@ -24,11 +24,11 @@ public class Cabinet {
         int yob;
         double gpa;
         System.out.println("Input student: #" + (arr.size() + 1));
-        id = inputNonDuplicatedId();
+        id = inputNonDuplicatedId();  // có hàm tránh lặp đây rồi
         System.out.print("Input name: ");
         name = sc.nextLine().trim().toUpperCase();
         yob = MyToys.inputAnInteger("Input yob: ", "Input yob again, plz!!");
-        gpa = MyToys.inputADouble("Input gpa: ", "Input gpa again, plz!!");
+        gpa = MyToys.inputADouble("Input gpa: ", "Input gpa again, plz!!", 0, 10);
         arr.add(new Student(id, name, yob, gpa));
         System.out.println("Add a student successfully");
     }
@@ -74,18 +74,40 @@ public class Cabinet {
     }
     
     public void updateAStudent() {
+        Menu updateMenu = new Menu("updating a student");
+        updateMenu.addNewOption("1. Update name");
+        updateMenu.addNewOption("2. Update yob");
+        updateMenu.addNewOption("3. Update gpa");
+        updateMenu.addNewOption("4. Quit");
         if (arr.isEmpty()) { 
             System.out.println("There is no student to update");
             return;
         }
         String id = MyToys.inputAnId();
         Student st = searchAStudent(id);
-        if (searchAStudent(id) == null) 
+        if (st == null) 
             System.out.println("NOT FOUND!!");
         else {
             System.out.println("Before updating");
             st.showProfile();
-            st.setGpa(MyToys.inputADouble("Input gpa: ", "Input gpa again, plz!!"));
+            int choice;
+            updateMenu.printMenu();
+            choice = updateMenu.getChoice();
+            System.out.println("----------------------------------------------");
+            switch (choice) {
+                case 1:
+                    st.setName(MyToys.inputString("Input name: ", "Input name again, plz!!"));
+                    break;
+                case 2:
+                    st.setYob(MyToys.inputAnInteger("Input yob: ", "Input yob again, plz!!"));
+                    break;
+                case 3:
+                    st.setGpa(MyToys.inputADouble("Input gpa: ", "Input gpa again, plz!!", 0, 10));
+                    break;
+                case 4:
+                    System.out.println("Update a student unsuccessfully");
+                    return;
+            }
             System.out.println("After updating");
             st.showProfile();
             System.out.println("Update a student successfully");
@@ -105,47 +127,35 @@ public class Cabinet {
             System.out.println("Remove a student successfully");
         }
     }
-
-    public static void printMenu() {
-        System.out.println("\nWelcome to FAP - FPT Academic Portal");
-        System.out.println("Choose the following functions to play with");
-        System.out.println("1. Add a student profile");
-        System.out.println("2. Print student list");
-        System.out.println("3. Search a student by id");
-        System.out.println("4. Update a student profile");
-        System.out.println("5. Remove a student");
-        System.out.println("6. Quit");
+    
+    public void printStudentListAscendingByID() {
+        if (arr.isEmpty()) {
+            System.out.println("This list is empty. Nothing to print!");
+            return;
+        }
+        Collections.sort(arr);
+        System.out.println("Here is the student list");
+        System.out.printf("|%-8s|%-25s|%4s|%5s|\n", "ID", "Name", "Yob", "Gpa");
+        for (Student x : arr) 
+            x.showProfile();
     }
-
-    public static void doIt() {
-        Cabinet tuSE = new Cabinet();
-        int choice;
-        do {
-            printMenu();
-            choice = MyToys.inputAnInteger("Input your choice (1...6): ", "Input your choice again, plz!!");
-            switch (choice) {
-                case 1:
-                    tuSE.addAStudent();
-                    break;
-                case 2:
-                    tuSE.printStudentList();
-                    break;
-                case 3:
-                    tuSE.searchAStudent();
-                    break;
-                case 4:
-                    tuSE.updateAStudent();
-                    break;
-                case 5:
-                    tuSE.removeAStudent();
-                    break;
-                case 6:
-                    System.out.println("Bye bye, see you next time");
-                    break;
-                default:
-                    System.out.println("Please choose 1 to 6, plz!!!");
+    
+    public void printStudentListAscendingByName() {
+        if (arr.isEmpty()) {
+            System.out.println("This list is empty. Nothing to print!");
+            return;
+        }
+        Comparator<Student> nameBalance = new Comparator<Student>() {
+            @Override
+            public int compare(Student st1, Student st2) {
+                return st1.getName().compareToIgnoreCase(st2.getName());
             }
-        } while (choice != 6);
+        };
+        Collections.sort(arr, nameBalance);
+        System.out.println("Here is the student list");
+        System.out.printf("|%-8s|%-25s|%4s|%5s|\n", "ID", "Name", "Yob", "Gpa");
+        for (Student x : arr) 
+            x.showProfile();
     }
 
 }

@@ -8,7 +8,7 @@ package data;
  *
  * @author NGUYEN HUY
  */
-public class Student {
+public class Student implements Comparable<Student> {
     private String id;
     private String name;
     private int yob;
@@ -55,6 +55,11 @@ public class Student {
     
     public void showProfile() {
         System.out.printf("|%8s|%-25s|%4d|%4.1f|\n", id, name, yob, gpa);
+    }
+
+    @Override
+    public int compareTo(Student that) {
+        return this.id.compareToIgnoreCase(that.id);
     }
     
 }
