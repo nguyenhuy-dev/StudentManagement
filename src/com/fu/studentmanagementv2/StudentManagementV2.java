@@ -15,9 +15,6 @@ public class StudentManagementV2 {
     /**
      * @param args the command line arguments
      */
-//    public static void main(String[] args) {  
-//        Cabinet.doIt(); 
-//    }
     
     public static void main(String[] args) {
         Menu menu = new Menu("FAP - FPT Academic Portal");
