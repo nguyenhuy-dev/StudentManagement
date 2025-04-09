@@ -31,7 +31,7 @@ public class MyToys {
                 input = sc.nextLine().trim().toUpperCase();
                 if (input.matches(format)) 
                     return input;
-                System.out.println("Input id again, plz!!");
+                System.out.println("Input id form [SE123456], plz!!");
         }
     }
     

@@ -135,7 +135,7 @@ public class Cabinet {
         }
         Collections.sort(arr);
         System.out.println("Here is the student list");
-        System.out.printf("|%-8s|%-25s|%4s|%5s|\n", "ID", "Name", "Yob", "Gpa");
+        System.out.printf("|%-8s|%-25s|%4s|%4s|\n", "ID", "Name", "Yob", "Gpa");
         for (Student x : arr) 
             x.showProfile();
     }
@@ -153,7 +153,7 @@ public class Cabinet {
         };
         Collections.sort(arr, nameBalance);
         System.out.println("Here is the student list");
-        System.out.printf("|%-8s|%-25s|%4s|%5s|\n", "ID", "Name", "Yob", "Gpa");
+        System.out.printf("|%-8s|%-25s|%4s|%4s|\n", "ID", "Name", "Yob", "Gpa");
         for (Student x : arr) 
             x.showProfile();
     }

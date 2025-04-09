@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package com.fu.studentmanagementv2;
 
 import data.*;
@@ -10,7 +7,7 @@ import data.*;
  *
  * @author NGUYEN HUY
  */
-public class StudentManagementV2 {
+public class StudentManagement {
 
     /**
      * @param args the command line arguments
